@@ -1,0 +1,18 @@
+
+
+  <mdb-card>
+
+    <mdb-card-body style="z-index: 10000 !important;">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">×</span>
+          </button>
+          <label>Meal name</label>
+          <input type="name"  class="form-control mb-4" placeholder="meal name">
+          <label>Meal picture url</label>
+          <input type="name"  class="form-control mb-4" placeholder="picture url">
+          <label>Meal cost</label>
+          <input type="number"  class="form-control mb-4" placeholder="cost in rands">
+          <button type="button" mdbBtn color="success" mdbWavesEffect>Add meal</button>
+
+    </mdb-card-body>
+  </mdb-card>
