@@ -1,18 +1,58 @@
+<mdb-card [formGroup]="mealForm">
+  <mdb-card-body style="z-index: 10000 !important">
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+    <label>Meal name</label>
+    <input
+      type="name"
+      class="form-control mb-4"
+      placeholder="meal name"
+      formControlName="mealName"
+    />
+    <label>Meal picture url</label>
+    <input type="name" class="form-control mb-4" placeholder="picture url"  formControlName="mealUrl" />
+    <label>Meal cost</label>
+    <input
+      type="number"
+      class="form-control mb-4"
+      placeholder="cost in rands"
+      formControlName="cost"
+    />
+    <label>Add food contents <span class="badge bg-danger ms-2">1</span></label>
 
+    <div class="row" style="width: 100%">
+      <div class="col-10">
+        <input type="text" class="form-control" placeholder="manu content" formControlName="content" />
+      </div>
+      <div class="col-2 p-0">
+        <button
+          size="sm"
+          class="button__search"
+          mdbBtn
+          type="button"
+          color="default"
+          mdbWavesEffect
+         (click)="addChip(content.value)"
+        >
+          <mdb-icon fas icon="plus"></mdb-icon>
+        </button>
+      </div>
+      <div class="col-12" style="height: 170px">
+        <div class="md-chip mr-2" *ngFor="let item of chips;let i = index">
+          <span >{{item}}</span>
+          <button type="button" class="md-chip-remove" (click)="removeChip(i)"></button>
+        </div>
+      </div>
+    </div>
 
-  <mdb-card>
-
-    <mdb-card-body style="z-index: 10000 !important;">
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-            <span aria-hidden="true">×</span>
-          </button>
-          <label>Meal name</label>
-          <input type="name"  class="form-control mb-4" placeholder="meal name">
-          <label>Meal picture url</label>
-          <input type="name"  class="form-control mb-4" placeholder="picture url">
-          <label>Meal cost</label>
-          <input type="number"  class="form-control mb-4" placeholder="cost in rands">
-          <button type="button" mdbBtn color="success" mdbWavesEffect>Add meal</button>
-
-    </mdb-card-body>
-  </mdb-card>
+    <button type="button" mdbBtn color="success" mdbWavesEffect (click)="saveToDatabase()">
+      Add meal
+    </button>
+  </mdb-card-body>
+</mdb-card>

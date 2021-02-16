@@ -12,7 +12,6 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { AddManuComponent } from './add-manu/add-manu.component';
 import {HttpClientModule} from '@angular/common/http';
 import { ToastNotificationsModule } from 'ngx-toast-notifications';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +30,7 @@ import { ToastNotificationsModule } from 'ngx-toast-notifications';
       ToastNotificationsModule
   ],
   providers: [],
-  entryComponents: [ AddRestaurantComponent,AddManuComponent ],
+  entryComponents: [ AddManuComponent,AddRestaurantComponent ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
