@@ -20,8 +20,8 @@ url:any = 'http://localhost:3000/resturant';
   }
 
   //update reasturent
-  putReasturents(reasturent:any){
-    return this.http.put(this.url,reasturent);
+  putReasturents(reasturent:any,id:string){
+    return this.http.put(`${this.url}/${id}`,reasturent);
   }
 
   deleteResturent(id:any){

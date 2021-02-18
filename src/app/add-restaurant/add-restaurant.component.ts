@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { MDBModalRef } from 'angular-bootstrap-md';
+import { DiveInnAPIService } from '../dive-inn-api.service';
+import { DataSharing } from '../services/dataSharing.service';
 
 @Component({
   selector: 'app-add-restaurant',
@@ -12,10 +14,13 @@ export class AddRestaurantComponent implements OnInit {
 
   chips:any[] = ['test'];
   mealInfo:any={};
-  constructor(public modalRef: MDBModalRef,private fb:FormBuilder) {}
+  constructor(public modalRef: MDBModalRef,
+    private fb:FormBuilder,
+    private diveInnAPIService:DiveInnAPIService,
+    private dataSharing:DataSharing) {}
 
   ngOnInit(): void {
-
+    
     this.mealForm = this.fb.group({
       mealName:[],
       mealUrl:[],
@@ -28,6 +33,8 @@ export class AddRestaurantComponent implements OnInit {
     this.mealForm.valueChanges.subscribe(value =>{
       console.log(value);
     })
+
+    console.log(this.dataSharing.selectedMeal);
   }
 
   get content(){
@@ -47,6 +54,10 @@ export class AddRestaurantComponent implements OnInit {
     this.mealInfo = this.mealForm.value;
     this.mealInfo['contents'] = this.chips;
     console.log(this.mealInfo);
+    this.dataSharing.selectedMeal.manue.push( this.mealInfo)
+    // update in the database
+   this.diveInnAPIService.putReasturents(this.dataSharing.selectedMeal,this.dataSharing.selectedMeal._id)
+   .subscribe(data =>console.log(data),err=>console.error(err))
     this.mealForm.reset();
   }
 }

@@ -4,6 +4,7 @@ import { AddManuComponent } from './add-manu/add-manu.component';
 import { AddRestaurantComponent } from './add-restaurant/add-restaurant.component';
 import { DiveInnAPIService } from './dive-inn-api.service';
 import { Toaster } from 'ngx-toast-notifications';
+import { DataSharing } from './services/dataSharing.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -21,13 +22,16 @@ export class AppComponent implements OnInit {
   resturents:any[] =[];
   constructor(private modalService: MDBModalService,
     private diveInnAPIService:DiveInnAPIService,
-    private toaster: Toaster) {}
+    private toaster: Toaster,
+    private dataSharing:DataSharing) {}
   ngOnInit(): void {
     this.getAllResturents();
   }
 
   //this method opens the modal to allow the user to change manue data
-  openView() {
+  async openView(resturant?:any) {
+    this.dataSharing.selectedMeal = await resturant;
+
     this.modalRef = this.modalService.show(AddRestaurantComponent, {
         backdrop: true,
         keyboard: true,
@@ -36,8 +40,10 @@ export class AppComponent implements OnInit {
         ignoreBackdropClick: false,
         class: 'modal-side modal-top-right',
         containerClass: 'right',
-        animated: true
+        animated: true,
     });
+
+  
   }
 
   openManu() {
@@ -57,8 +63,6 @@ export class AppComponent implements OnInit {
   chanegedInput(date){
     
     return  this.inputForm.openingTime= new Date(date).getHours()+':'+new Date(date).getMinutes()+':'+new Date(date).getSeconds(); 
-   
-     //this.inputForm.closingTime= new Date(date).getHours()+':'+new Date(date).getMinutes()+':'+new Date(date).getSeconds(); 
   }
   
   addResturant(){
@@ -97,7 +101,6 @@ getAllResturents(){
   }
 
   delete(id:any){
-    console.log(id);
 
     this.diveInnAPIService.deleteResturent(id)
     .subscribe((data:any[])=>{

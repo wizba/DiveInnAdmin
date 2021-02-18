@@ -163,7 +163,7 @@
                   </td>
                   <td>{{item.openingTime | date: 'h:mm:ss a'}}</td>
                   <td>{{item.closingTime | date: 'h:mm:ss a'}}</td>
-                  <td><mdb-icon (click)="openManu()"  class="mr-2" fas icon="eye" style="color: #799fef;"></mdb-icon><mdb-icon (click)=" openView()" style="color:#2bbbad" fas icon="plus-square"></mdb-icon></td>
+                  <td><mdb-icon (click)="openManu()"  class="mr-2" fas icon="eye" style="color: #799fef;"></mdb-icon><mdb-icon (click)=" openView(item)" style="color:#2bbbad" fas icon="plus-square"></mdb-icon></td>
                   <td style="text-align: center"><mdb-icon style="color: #e64646;" far icon="trash-alt" (click)="delete(item._id)"></mdb-icon></td>
                 </tr>
               </tbody>
