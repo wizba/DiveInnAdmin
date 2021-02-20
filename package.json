@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "~10.1.2",
     "@angular/router": "~10.1.2",
     "@fortawesome/fontawesome-free": "^5.15.2",
+    "@techiediaries/ngx-qrcode": "^9.1.0",
     "@types/chart.js": "^2.9.30",
     "angular-bootstrap-md": "^10.1.1",
     "animate.css": "^4.1.1",
