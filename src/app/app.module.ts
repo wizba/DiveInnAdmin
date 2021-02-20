@@ -13,6 +13,7 @@ import { AddManuComponent } from './add-manu/add-manu.component';
 import {HttpClientModule} from '@angular/common/http';
 import { ToastNotificationsModule } from 'ngx-toast-notifications';
 import { DataSharing } from './services/dataSharing.service';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,10 +26,11 @@ import { DataSharing } from './services/dataSharing.service';
     MDBBootstrapModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-      OwlDateTimeModule, 
-      OwlNativeDateTimeModule,
-      HttpClientModule,
-      ToastNotificationsModule,
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule,
+    HttpClientModule,
+    ToastNotificationsModule,
+    NgxQRCodeModule
       
   ],
   providers: [DataSharing],

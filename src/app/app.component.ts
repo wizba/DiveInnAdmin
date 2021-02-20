@@ -5,6 +5,8 @@ import { AddRestaurantComponent } from './add-restaurant/add-restaurant.componen
 import { DiveInnAPIService } from './dive-inn-api.service';
 import { Toaster } from 'ngx-toast-notifications';
 import { DataSharing } from './services/dataSharing.service';
+import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -146,4 +148,7 @@ getAllResturents(){
    },err=>this.showToast('Un successful','update failed','danger'));
     
   }
+
+  //QrCode componenet will start here
+  QrCodes:any[] = [];
 }
