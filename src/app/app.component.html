@@ -57,9 +57,10 @@
   <!--Add resturant modal start-->
   <div class="row mx-0">
    
-    <div class="col-12 px-0">
+    <div class="col-12 px-0" style="padding-right: 15px  !important;
+    padding-left: 15px !important">
        
-      <mdb-card>
+      <mdb-card class="mx-0">
         <mdb-card-header>Insert new resturant</mdb-card-header>
         <mdb-card-body>
           <div class="row">
@@ -114,7 +115,7 @@
     </div>
   </div>
   <!--Add resturant modal End-->
-  <div class="row">
+  <div class="row mx-0" *ngIf="!showModal">
     <div class="col-lg-12">
       <div class="card">
         <div class="card-body">
@@ -158,7 +159,7 @@
                   </td>
                   <td>
                     <div class="action">
-                      <mdb-icon far icon="edit"></mdb-icon>
+                      <mdb-icon far icon="edit" (click)="showEditModal(item)"></mdb-icon>
                     </div>
                   </td>
                   <td>{{item.openingTime | date: 'h:mm:ss a'}}</td>
@@ -192,5 +193,66 @@
       </div>
     </div>
   </div>
+
+  <!--Edit selected component-->
+  <div class="row mx-0" *ngIf="showModal">
+    <div class="col-12 px-0"  style="padding-right: 15px  !important;
+    padding-left: 15px !important">
+       
+      <mdb-card class="mx-0">
+        <mdb-card-header>Upadate {{seletedResturant.name}}</mdb-card-header>
+        <mdb-card-body>
+          <div class="row">
+            <div class="col-3">
+              <label>Resturant Name</label>
+              <input [(ngModel)]="editInputForm.name" type="name" class="form-control mb-4" placeholder="name" />
+            </div>
+            <div class="col-3">
+              <label>Resturant logo</label>
+              <input
+                type="url"
+                class="form-control mb-4"
+                placeholder="logo url"
+                [(ngModel)]="editInputForm.logo_url"
+              />
+            </div>
+            <div class="col-3">
+              <label>Opening time</label>
+              <input
+                class="date"
+                [owlDateTimeTrigger]="dt5"
+                [owlDateTime]="dt5"
+                [(ngModel)]="editInputForm.openingTime"
+                
+              />
+              <owl-date-time [pickerType]="'timer'" #dt5></owl-date-time>
+            </div>
+            <div class="col-3">
+              <label>Closing time</label>
+              <input
+                class="date"
+                [owlDateTimeTrigger]="dt6"
+                [owlDateTime]="dt6"
+                [(ngModel)]="editInputForm.closingTime"
+              />
+              <owl-date-time [pickerType]="'timer'" #dt6></owl-date-time>
+            </div>
+          </div>
+          <button
+            size="sm"
+            class="button__search"
+            mdbBtn
+            type="button"
+            color="default"
+            mdbWavesEffect
+            (click)="addEditedResturant()"
+          >
+            <mdb-icon fas icon="plus"></mdb-icon>
+          </button>
+        </mdb-card-body>
+      </mdb-card>
+    </div>
+  </div>
+  <!--Edit selected component-->
   <!-- end row -->
 </div>

@@ -12,7 +12,7 @@ import { DataSharing } from '../services/dataSharing.service';
 export class AddRestaurantComponent implements OnInit {
   mealForm:FormGroup;
 
-  chips:any[] = ['test'];
+  chips:any[] = [];
   mealInfo:any={};
   constructor(public modalRef: MDBModalRef,
     private fb:FormBuilder,
@@ -27,8 +27,6 @@ export class AddRestaurantComponent implements OnInit {
       cost:[],
       content:[]
     });
-
-
 
     this.mealForm.valueChanges.subscribe(value =>{
       console.log(value);
@@ -57,7 +55,10 @@ export class AddRestaurantComponent implements OnInit {
     this.dataSharing.selectedMeal.manue.push( this.mealInfo)
     // update in the database
    this.diveInnAPIService.putReasturents(this.dataSharing.selectedMeal,this.dataSharing.selectedMeal._id)
-   .subscribe(data =>console.log(data),err=>console.error(err))
+   .subscribe(data =>console.log(data),err=>console.error(err));
+   //clear the form once you done
     this.mealForm.reset();
+    //clear the chips
+    this.chips =[];
   }
 }

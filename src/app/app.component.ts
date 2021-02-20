@@ -19,7 +19,18 @@ export class AppComponent implements OnInit {
     openingTime:'',
     closingTime:''
   }
+
+  editInputForm:any={
+    name:'',
+    logo_url:'',
+    openingTime:'',
+    closingTime:''
+  }
+  
   resturents:any[] =[];
+  showModal:boolean = false;
+  seletedResturant:any;
+  
   constructor(private modalService: MDBModalService,
     private diveInnAPIService:DiveInnAPIService,
     private toaster: Toaster,
@@ -61,7 +72,6 @@ export class AppComponent implements OnInit {
 
 
   chanegedInput(date){
-    
     return  this.inputForm.openingTime= new Date(date).getHours()+':'+new Date(date).getMinutes()+':'+new Date(date).getSeconds(); 
   }
   
@@ -101,10 +111,39 @@ getAllResturents(){
   }
 
   delete(id:any){
-
     this.diveInnAPIService.deleteResturent(id)
     .subscribe((data:any[])=>{
       this.resturents = data;
     })
+  }
+
+
+  showEditModal(editResturant?:any){
+
+    
+    if(editResturant != undefined){
+      this.seletedResturant = editResturant
+      console.log(this.seletedResturant)
+    }
+    else
+      this.editInputForm.inputForm={
+        name:'',
+        logo_url:'',
+        openingTime:'',
+        closingTime:''
+      }
+    this.showModal = !this.showModal;
+  }
+
+  // used to update a certain resturant
+  addEditedResturant(){
+   let userId = this.seletedResturant._id;
+   this.diveInnAPIService.putReasturents(this.editInputForm,userId)
+   .subscribe((data:any[])=>{
+    this.showToast('success','restaurant added','success');
+    this.resturents = data;
+    this.showEditModal();
+   },err=>this.showToast('Un successful','update failed','danger'));
+    
   }
 }
