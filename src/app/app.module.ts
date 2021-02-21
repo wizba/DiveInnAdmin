@@ -15,6 +15,7 @@ import { ToastNotificationsModule } from 'ngx-toast-notifications';
 import { DataSharing } from './services/dataSharing.service';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { QrCodeModalComponent } from './qr-code-modal/qr-code-modal.component';
+import { NgSearchPipe } from 'ng-search-pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,8 +33,8 @@ import { QrCodeModalComponent } from './qr-code-modal/qr-code-modal.component';
     OwlNativeDateTimeModule,
     HttpClientModule,
     ToastNotificationsModule,
-    NgxQRCodeModule
-      
+    NgxQRCodeModule,
+    NgSearchPipe
   ],
   providers: [DataSharing],
   entryComponents: [ AddManuComponent,AddRestaurantComponent,QrCodeModalComponent ],

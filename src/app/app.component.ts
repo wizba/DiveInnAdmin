@@ -15,7 +15,7 @@ import { QrCodeModalComponent } from './qr-code-modal/qr-code-modal.component';
 })
 export class AppComponent implements OnInit {
   modalRef: MDBModalRef;
-
+  searchText:string;
   inputForm:any={
     name:'',
     logo_url:'',
