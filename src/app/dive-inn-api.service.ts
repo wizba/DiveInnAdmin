@@ -5,7 +5,7 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class DiveInnAPIService {
-url:any = 'http://localhost:3000/resturant';
+url:any = 'http://192.168.43.97:3000/resturant';
 
   constructor(private http:HttpClient) { }
 
