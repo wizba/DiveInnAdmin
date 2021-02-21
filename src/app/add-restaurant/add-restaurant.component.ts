@@ -42,6 +42,7 @@ export class AddRestaurantComponent implements OnInit {
 
   addChip(chipText:string){
     this.chips.push(chipText);
+    this.content.reset();
   }
 
   removeChip(index:number){

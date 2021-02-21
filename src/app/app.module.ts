@@ -14,11 +14,13 @@ import {HttpClientModule} from '@angular/common/http';
 import { ToastNotificationsModule } from 'ngx-toast-notifications';
 import { DataSharing } from './services/dataSharing.service';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+import { QrCodeModalComponent } from './qr-code-modal/qr-code-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
     AddRestaurantComponent,
-    AddManuComponent
+    AddManuComponent,
+    QrCodeModalComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,7 @@ import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
       
   ],
   providers: [DataSharing],
-  entryComponents: [ AddManuComponent,AddRestaurantComponent ],
+  entryComponents: [ AddManuComponent,AddRestaurantComponent,QrCodeModalComponent ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

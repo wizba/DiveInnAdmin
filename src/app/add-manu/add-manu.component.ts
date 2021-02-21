@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MDBModalRef } from 'angular-bootstrap-md';
+import { DiveInnAPIService } from '../dive-inn-api.service';
+import { DataSharing } from '../services/dataSharing.service';
 
 @Component({
   selector: 'app-add-manu',
@@ -8,9 +10,16 @@ import { MDBModalRef } from 'angular-bootstrap-md';
 })
 export class AddManuComponent implements OnInit {
 
-  constructor(public modalRef: MDBModalRef) {}
-
-  ngOnInit(): void {
+  manu:any[] =[];
+  name ='';
+  constructor(public modalRef: MDBModalRef,
+    private diveInnAPIService:DiveInnAPIService,
+    private dataSharing:DataSharing) {
+      
+    this.manu = this.dataSharing.selectedMeal.manue;
+    this.name=this.dataSharing.selectedMeal.name;
   }
+  ngOnInit(): void { }
 
+ 
 }

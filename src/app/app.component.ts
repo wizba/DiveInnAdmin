@@ -6,6 +6,7 @@ import { DiveInnAPIService } from './dive-inn-api.service';
 import { Toaster } from 'ngx-toast-notifications';
 import { DataSharing } from './services/dataSharing.service';
 import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
+import { QrCodeModalComponent } from './qr-code-modal/qr-code-modal.component';
 
 @Component({
   selector: 'app-root',
@@ -59,7 +60,9 @@ export class AppComponent implements OnInit {
   
   }
 
-  openManu() {
+  async openManu(resturant?:any) {
+    this.dataSharing.selectedMeal = await resturant;
+
     this.modalRef = this.modalService.show(AddManuComponent, {
         backdrop: true,
         keyboard: true,
@@ -73,6 +76,18 @@ export class AppComponent implements OnInit {
   }
 
 
+  OpenCode(){
+    this.modalRef = this.modalService.show(QrCodeModalComponent, {
+      backdrop: true,
+      keyboard: true,
+      focus: true,
+      show: false,
+      ignoreBackdropClick: false,
+      class: 'modal-frame modal-bottom',
+      containerClass: 'bottom',
+      animated: true
+  });
+  }
   chanegedInput(date){
     return  this.inputForm.openingTime= new Date(date).getHours()+':'+new Date(date).getMinutes()+':'+new Date(date).getSeconds(); 
   }
@@ -151,4 +166,17 @@ getAllResturents(){
 
   //QrCode componenet will start here
   QrCodes:any[] = [];
+  elementType = NgxQrcodeElementTypes.URL;
+  correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
+  value = 'kfc';
+  generateQrCode(){
+   
+    this.resturents.forEach((element,index )=> {
+      this.QrCodes.push({
+          elementType : NgxQrcodeElementTypes.URL,
+          correctionLevel : NgxQrcodeErrorCorrectionLevels.HIGH,
+          value:element.name
+        })
+    });
+  }
 }

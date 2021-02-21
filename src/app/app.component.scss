@@ -40,3 +40,17 @@ body{
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
+.elementToFadeInAndOut {
+   
+   padding: 0;
+    -webkit-animation: fadeinout 4s linear forwards;
+    animation: fadeinout 0.5s linear forwards;
+}
+
+@-webkit-keyframes fadeinout {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+

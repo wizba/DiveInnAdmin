@@ -1,17 +1,17 @@
 <div class="container">
   <div class="row pt-5">
     <div class="col-xl-3 col-md-6">
-      <div class="card bg-pattern">
+      <div class="card bg-pattern" style="height: 110px;">
         <div class="card-body">
           <div class="float-right">
             <i class="fa fa-archive text-primary h4 ml-3"></i>
           </div>
-          <h5 class="font-size-20 mt-0 pt-1">{{resturents.length}}</h5>
+          <h5 class="font-size-20 mt-0 pt-1">{{ resturents.length }}</h5>
           <p class="text-muted mb-0">Total resturents</p>
         </div>
       </div>
     </div>
-    <div class="col-xl-3 col-md-6">
+    <!-- <div class="col-xl-3 col-md-6">
       <div class="card bg-pattern">
         <div class="card-body">
           <div class="float-right">
@@ -21,10 +21,10 @@
           <p class="text-muted mb-0">Completed Projects</p>
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <div class="col-xl-6 col-md-6">
-      <div class="card">
+    <div class="col-xl-9 col-md-6" >
+      <div class="card"  style="height: 110px;">
         <div class="card-body">
           <form>
             <div class="form-group mb-0">
@@ -55,18 +55,23 @@
   </div>
   <!-- end row -->
   <!--Add resturant modal start-->
-  <div class="row mx-0">
-   
-    <div class="col-12 px-0" style="padding-right: 15px  !important;
-    padding-left: 15px !important">
-       
+  <div class="row mx-0" *ngIf="!showModal" class="elementToFadeInAndOut">
+    <div
+      class="col-12 px-0"
+      style="padding-right: 15px !important; padding-left: 15px !important"
+    >
       <mdb-card class="mx-0">
         <mdb-card-header>Insert new resturant</mdb-card-header>
         <mdb-card-body>
           <div class="row">
             <div class="col-3">
               <label>Resturant Name</label>
-              <input [(ngModel)]="inputForm.name" type="name" class="form-control mb-4" placeholder="name" />
+              <input
+                [(ngModel)]="inputForm.name"
+                type="name"
+                class="form-control mb-4"
+                placeholder="name"
+              />
             </div>
             <div class="col-3">
               <label>Resturant logo</label>
@@ -84,7 +89,6 @@
                 [owlDateTimeTrigger]="dt4"
                 [owlDateTime]="dt4"
                 [(ngModel)]="inputForm.openingTime"
-                
               />
               <owl-date-time [pickerType]="'timer'" #dt4></owl-date-time>
             </div>
@@ -110,12 +114,23 @@
           >
             <mdb-icon fas icon="plus"></mdb-icon>
           </button>
+          <button
+          size="sm"
+          class="button__search ml-3"
+          mdbBtn
+          type="button"
+          color="default"
+          mdbWavesEffect
+          (click)="OpenCode()"
+        >
+        <mdb-icon fas icon="qrcode"></mdb-icon>
+        </button>
         </mdb-card-body>
       </mdb-card>
     </div>
   </div>
   <!--Add resturant modal End-->
-  <div class="row mx-0" *ngIf="!showModal">
+  <div class="row mx-0" *ngIf="!showModal" class="elementToFadeInAndOut">
     <div class="col-lg-12">
       <div class="card">
         <div class="card-body">
@@ -130,15 +145,15 @@
                   <th scope="col">Edit</th>
                   <th scope="col">Open time</th>
                   <th scope="col">Closing time</th>
-                  <th scope="col"> Menu</th>
+                  <th scope="col">Menu</th>
                   <th scope="col">delete</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of resturents, let i =index">
-                  <th scope="row">{{i+1}}</th>
-                  <td>{{item.name}}</td>
-                  <td>{{item.created_at | date: 'dd/MM/yyyy'}}</td>
+                <tr *ngFor="let item of resturents; let i = index">
+                  <th scope="row">{{ i + 1 }}</th>
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.created_at | date: "dd/MM/yyyy" }}</td>
                   <td>
                     <div class="team">
                       <a
@@ -150,7 +165,7 @@
                         data-original-title="Roger Drake"
                       >
                         <img
-                          [src]=item.logo_url
+                          [src]="item.logo_url"
                           class="rounded-circle avatar-xs"
                           alt=""
                         />
@@ -159,20 +174,45 @@
                   </td>
                   <td>
                     <div class="action">
-                      <mdb-icon far icon="edit" (click)="showEditModal(item)"></mdb-icon>
+                      <mdb-icon
+                        far
+                        icon="edit"
+                        (click)="showEditModal(item)"
+                      ></mdb-icon>
                     </div>
                   </td>
-                  <td>{{item.openingTime | date: 'h:mm:ss a'}}</td>
-                  <td>{{item.closingTime | date: 'h:mm:ss a'}}</td>
-                  <td><mdb-icon (click)="openManu()"  class="mr-2" fas icon="eye" style="color: #799fef;"></mdb-icon><mdb-icon (click)=" openView(item)" style="color:#2bbbad" fas icon="plus-square"></mdb-icon></td>
-                  <td style="text-align: center"><mdb-icon style="color: #e64646;" far icon="trash-alt" (click)="delete(item._id)"></mdb-icon></td>
+                  <td>{{ item.openingTime | date: "h:mm:ss a" }}</td>
+                  <td>{{ item.closingTime | date: "h:mm:ss a" }}</td>
+                  <td>
+                    <mdb-icon
+                      (click)="openManu(item)"
+                      class="mr-2"
+                      fas
+                      icon="eye"
+                      style="color: #799fef"
+                    ></mdb-icon
+                    ><mdb-icon
+                      (click)="openView(item)"
+                      style="color: #2bbbad"
+                      fas
+                      icon="plus-square"
+                    ></mdb-icon>
+                  </td>
+                  <td style="text-align: center">
+                    <mdb-icon
+                      style="color: #e64646"
+                      far
+                      icon="trash-alt"
+                      (click)="delete(item._id)"
+                    ></mdb-icon>
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
           <!-- end project-list -->
 
-          <div class="pt-3">
+          <!-- <div class="pt-3">
             <ul class="pagination justify-content-end mb-0">
               <li class="page-item disabled">
                 <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
@@ -188,24 +228,30 @@
                 <a class="page-link" href="#">Next</a>
               </li>
             </ul>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
   </div>
 
   <!--Edit selected component-->
-  <div class="row mx-0" *ngIf="showModal">
-    <div class="col-12 px-0"  style="padding-right: 15px  !important;
-    padding-left: 15px !important">
-       
+  <div class="row mx-0" *ngIf="showModal" class="elementToFadeInAndOut">
+    <div
+      class="col-12 px-0"
+      style="padding-right: 15px !important; padding-left: 15px !important"
+    >
       <mdb-card class="mx-0">
-        <mdb-card-header>Upadate {{seletedResturant.name}}</mdb-card-header>
+        <mdb-card-header>Upadate {{ seletedResturant.name }}</mdb-card-header>
         <mdb-card-body>
           <div class="row">
             <div class="col-3">
               <label>Resturant Name</label>
-              <input [(ngModel)]="editInputForm.name" type="name" class="form-control mb-4" placeholder="name" />
+              <input
+                [(ngModel)]="editInputForm.name"
+                type="name"
+                class="form-control mb-4"
+                placeholder="name"
+              />
             </div>
             <div class="col-3">
               <label>Resturant logo</label>
@@ -223,7 +269,6 @@
                 [owlDateTimeTrigger]="dt5"
                 [owlDateTime]="dt5"
                 [(ngModel)]="editInputForm.openingTime"
-                
               />
               <owl-date-time [pickerType]="'timer'" #dt5></owl-date-time>
             </div>
@@ -240,6 +285,17 @@
           </div>
           <button
             size="sm"
+            class="button__search mr-2"
+            mdbBtn
+            type="button"
+            color="danger"
+            mdbWavesEffect
+            (click)="showModal = !showModal"
+          >
+          <mdb-icon fas icon="times"></mdb-icon>
+          </button>
+          <button
+            size="sm"
             class="button__search"
             mdbBtn
             type="button"
@@ -249,6 +305,7 @@
           >
             <mdb-icon fas icon="plus"></mdb-icon>
           </button>
+          
         </mdb-card-body>
       </mdb-card>
     </div>
@@ -256,3 +313,17 @@
   <!--Edit selected component-->
   <!-- end row -->
 </div>
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-4" *ngFor="let item of resturents; let i = index">
+      <ngx-qrcode
+      [elementType]="elementType"
+      [errorCorrectionLevel]="correctionLevel"
+      [value]=item.name
+      alt="Demo QR Code"
+      cssClass="bshadow"></ngx-qrcode>
+    
+    <label >{{item.name}}</label>
+    </div>
+  </div>
+</div> -->
