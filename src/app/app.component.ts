@@ -40,10 +40,13 @@ export class AppComponent implements OnInit {
     private dataSharing:DataSharing) {}
   ngOnInit(): void {
     this.getAllResturents();
+    this.modalService.closed.subscribe(() =>  this.getAllResturents());
   }
 
   //this method opens the modal to allow the user to change manue data
   async openView(resturant?:any) {
+
+    console.log(resturant)
     this.dataSharing.selectedMeal = await resturant;
 
     this.modalRef = this.modalService.show(AddRestaurantComponent, {
@@ -56,7 +59,7 @@ export class AppComponent implements OnInit {
         containerClass: 'right',
         animated: true,
     });
-
+    
   
   }
 
@@ -99,7 +102,9 @@ export class AppComponent implements OnInit {
     .subscribe((data:any[])=>{
     
       this.showToast('success','restaurant added','success');
-      this.resturents = data;
+      
+      this.diveInnAPIService.resturant = data;
+      this.resturents = this.diveInnAPIService.resturant;
     },error=>{
       console.log(error.message)
       this.showToast('not added',error.message,'danger');
@@ -113,11 +118,16 @@ export class AppComponent implements OnInit {
     }
   }
 getAllResturents(){
-  this.diveInnAPIService.getAllResturents()
+  
+
+  this.diveInnAPIService
+  .get_all_resturents()
   .subscribe((data:any[])=>{
-      this.resturents = data;
-      console.log(data);
+    this.resturents = data;
+    console.log(data);
+    this.diveInnAPIService.resturant = data;
   })
+
 }
   showToast(title,body,color) {
     this.toaster.open({ text: body,

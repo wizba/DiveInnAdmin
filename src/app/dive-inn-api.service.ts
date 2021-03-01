@@ -5,8 +5,9 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class DiveInnAPIService {
-url:any = 'http://192.168.43.97:3000/resturant';
-
+url:any = 'http://localhost:3100/resturant';
+newUrl:any = 'http://localhost:3000'
+resturant:any[] =[];
   constructor(private http:HttpClient) { }
 
   //get all reasturent
@@ -27,4 +28,16 @@ url:any = 'http://192.168.43.97:3000/resturant';
   deleteResturent(id:any){
     return this.http.delete(`${this.url}/${id}`);
   }
+
+
+  //get all resturents new api
+  get_all_resturents(){
+    return this.http.get(`${this.newUrl}/restuarant`);
+  }
+
+   //create reasturent
+   post_manu(reasturent:any){
+    return this.http.post(`${this.newUrl}/manu`,reasturent);
+  }
+
 }

@@ -16,8 +16,10 @@ export class AddManuComponent implements OnInit {
     private diveInnAPIService:DiveInnAPIService,
     private dataSharing:DataSharing) {
       
-    this.manu = this.dataSharing.selectedMeal.manue;
+    this.manu = this.dataSharing.selectedMeal.manu;
     this.name=this.dataSharing.selectedMeal.name;
+
+    console.log(this.manu);
   }
   ngOnInit(): void { }
 

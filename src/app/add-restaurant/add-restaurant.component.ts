@@ -51,12 +51,16 @@ export class AddRestaurantComponent implements OnInit {
 
   saveToDatabase(){
     this.mealInfo = this.mealForm.value;
-    this.mealInfo['contents'] = this.chips;
+    this.mealInfo['content'] = this.chips;
+    this.mealInfo['resturant'] = this.dataSharing.selectedMeal._id;
     console.log(this.mealInfo);
-    this.dataSharing.selectedMeal.manue.push( this.mealInfo)
+    //this.dataSharing.selectedMeal.manue.push( this.mealInfo)
     // update in the database
-   this.diveInnAPIService.putReasturents(this.dataSharing.selectedMeal,this.dataSharing.selectedMeal._id)
-   .subscribe(data =>console.log(data),err=>console.error(err));
+  //  this.diveInnAPIService.putReasturents(this.dataSharing.selectedMeal,this.dataSharing.selectedMeal._id)
+  //  .subscribe(data =>console.log(data),err=>console.error(err));
+
+   this.diveInnAPIService.post_manu(this.mealInfo)
+   .subscribe((data:any[]) =>this.diveInnAPIService.resturant=data,err=>console.error(err));
    //clear the form once you done
     this.mealForm.reset();
     //clear the chips
