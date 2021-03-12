@@ -12,21 +12,21 @@ resturant:any[] =[];
 
   //get all reasturent
   getAllResturents(){
-    return this.http.get(this.url);
+    return this.http.get(`${this.newUrl}/restuarant`);
   }
 
   //create reasturent
   postReasturents(reasturent:any){
-    return this.http.post(this.url,reasturent);
+    return this.http.post(`${this.newUrl}/restaurant`,reasturent);
   }
 
   //update reasturent
   putReasturents(reasturent:any,id:string){
-    return this.http.put(`${this.url}/${id}`,reasturent);
+    return this.http.put(`${this.newUrl}/${id}`,reasturent);
   }
 
   deleteResturent(id:any){
-    return this.http.delete(`${this.url}/${id}`);
+    return this.http.delete(`${this.newUrl}/${id}`);
   }
 
 
@@ -40,4 +40,5 @@ resturant:any[] =[];
     return this.http.post(`${this.newUrl}/manu`,reasturent);
   }
 
+  
 }

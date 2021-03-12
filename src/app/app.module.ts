@@ -16,12 +16,21 @@ import { DataSharing } from './services/dataSharing.service';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { QrCodeModalComponent } from './qr-code-modal/qr-code-modal.component';
 import { NgSearchPipe } from 'ng-search-pipe';
+import { KitchenComponent } from './kitchen/kitchen.component';
+import { KitchenDashboardComponent } from './kitchen-dashboard/kitchen-dashboard.component';
+import { AppRoutingModule } from './app.routing';
+import { AdminComponent } from './admin/admin.component';
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 @NgModule({
   declarations: [
     AppComponent,
     AddRestaurantComponent,
     AddManuComponent,
-    QrCodeModalComponent
+    QrCodeModalComponent,
+    KitchenComponent,
+    KitchenDashboardComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +43,9 @@ import { NgSearchPipe } from 'ng-search-pipe';
     HttpClientModule,
     ToastNotificationsModule,
     NgxQRCodeModule,
-    NgSearchPipe
+    NgSearchPipe,
+    AppRoutingModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [DataSharing],
   entryComponents: [ AddManuComponent,AddRestaurantComponent,QrCodeModalComponent ],
