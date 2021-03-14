@@ -40,5 +40,12 @@ resturant:any[] =[];
     return this.http.post(`${this.newUrl}/manu`,reasturent);
   }
 
-  
+  // create order
+  create_order(order:any){
+    return this.http.post(`${this.newUrl}/order`,order);
+  }
+  // specific reasturant with alln its orders
+  getReasturant(id:any){
+    return this.http.get(`${this.newUrl}/restuarant/${id}`);
+  }
 }

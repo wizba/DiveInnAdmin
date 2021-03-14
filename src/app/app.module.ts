@@ -21,6 +21,9 @@ import { KitchenDashboardComponent } from './kitchen-dashboard/kitchen-dashboard
 import { AppRoutingModule } from './app.routing';
 import { AdminComponent } from './admin/admin.component';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+import { PendingComponent } from './kitchen-dashboard/pending/pending.component';
+import { PreparingComponent } from './kitchen-dashboard/preparing/preparing.component';
+import { DoneComponent } from './kitchen-dashboard/done/done.component';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     QrCodeModalComponent,
     KitchenComponent,
     KitchenDashboardComponent,
-    AdminComponent
+    AdminComponent,
+    PendingComponent,
+    PreparingComponent,
+    DoneComponent
   ],
   imports: [
     BrowserModule,

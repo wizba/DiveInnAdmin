@@ -1,0 +1,35 @@
+<div class="row px-3 mx-0">
+    <div
+      class="col-lg-3 col-md-6 col-sm-12 col-xs-12 pt-5"
+      *ngFor="let item of [1, 2, 3, 4, 5, 6]"
+    >
+      <mdb-card>
+        <!--Card image-->
+  
+        <!--Card content-->
+        <mdb-card-body>
+          <!--Title-->
+          <mdb-card-title>
+            <h4>Ordered by pending</h4>
+          </mdb-card-title>
+  
+          <!--Text-->
+          <mdb-card-text> order number : 1 </mdb-card-text>
+          <mdb-card-text> cost : R 335.00 </mdb-card-text>
+          <mdb-card-text> time : 18:50 pm </mdb-card-text>
+          <mdb-card-text> status : pending </mdb-card-text>
+          <button
+            mdbBtn
+            type="button"
+            color="success"
+            size="sm"
+            outline="true"
+            mdbWavesEffect
+          >
+            Comfirm order
+          </button>
+        </mdb-card-body>
+      </mdb-card>
+    </div>
+  </div>
+  

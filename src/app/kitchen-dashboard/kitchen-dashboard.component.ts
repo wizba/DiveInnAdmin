@@ -7,9 +7,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class KitchenDashboardComponent implements OnInit {
 
+  selectedPage:any[]=[true,false,false];
+  statusFilter:string="pending";
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  selectPage(status:string,selectedIndex:number){
+    
+    this.selectedPage.forEach((element,index:number) => {
+      if(selectedIndex == index){
+        this.selectedPage[index] = true;
+      }else{
+        this.selectedPage[index] = false;
+      }
+      
+    });
+  }
 }

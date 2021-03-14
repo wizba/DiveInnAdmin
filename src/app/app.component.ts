@@ -18,18 +18,35 @@ import { map } from "rxjs/operators";
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent implements OnInit {
-  constructor(private socket: Socket) {}
+  constructor(private socket: Socket,private API:DiveInnAPIService) {}
   ngOnInit(): void {
     this.getMessage();
+    this.getClientOrder();
   }
 
   getMessage() {
     return this.socket
       .fromEvent("message")
       .pipe(map((data) => console.log(data)))
-      .subscribe(data=>{
-        console.log(data);
-        
-      })
+      .subscribe()
+  }
+
+  getClientOrder() {
+    return this.socket
+      .fromEvent("clientOrder")
+      .pipe(map((data:any) =>{ 
+
+          this.API.create_order(data)
+          .subscribe(async(value)=>{
+            this.API.getReasturant(data.resturant)
+            .subscribe(value=>{
+              console.log(value)
+            },error=>{
+              console.error(error)
+          })
+        });
+
+      }))
+      .subscribe()
   }
 }

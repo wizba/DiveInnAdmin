@@ -6,7 +6,7 @@ import { KitchenComponent } from './kitchen/kitchen.component';
 
 
 const routes: Routes = [
-    { path: '',   redirectTo: '/kitchen', pathMatch: 'full' },
+    { path: '',   redirectTo: '/login', pathMatch: 'full' },
   { path: 'admin', component: AdminComponent },
   { path: 'kitchen', component: KitchenDashboardComponent },
   {path:'login',component:KitchenComponent}
