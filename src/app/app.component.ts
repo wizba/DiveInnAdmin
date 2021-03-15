@@ -12,16 +12,16 @@ import {
 import { QrCodeModalComponent } from "./qr-code-modal/qr-code-modal.component";
 import { Socket } from "ngx-socket-io";
 import { map } from "rxjs/operators";
+import { AuthService } from "./services/auth.service";
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent implements OnInit {
-  constructor(private socket: Socket,private API:DiveInnAPIService) {}
+  constructor(private socket: Socket,private API:DiveInnAPIService,private authService:AuthService) {}
   ngOnInit(): void {
-    this.getMessage();
-    this.getClientOrder();
+   
   }
 
   getMessage() {
@@ -48,5 +48,18 @@ export class AppComponent implements OnInit {
 
       }))
       .subscribe()
+  }
+
+  getRestaurantData(){
+
+    
+    if(this.API.my_reasturant)
+    this.API.reasturantData(this.API.my_reasturant)
+    .subscribe((value:any)=>{
+      this.API.orders = value.orders;
+      
+    },error=>{
+        alert('something went wrong')
+    })
   }
 }

@@ -36,7 +36,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     AdminComponent,
     PendingComponent,
     PreparingComponent,
-    DoneComponent
+    DoneComponent,
+    
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,7 @@ export class DiveInnAPIService {
 url:any = 'http://localhost:3100/resturant';
 newUrl:any = 'http://localhost:3000'
 resturant:any[] =[];
+orders:any[] = [];
   constructor(private http:HttpClient) { }
 
   //get all reasturent
@@ -47,5 +48,46 @@ resturant:any[] =[];
   // specific reasturant with alln its orders
   getReasturant(id:any){
     return this.http.get(`${this.newUrl}/restuarant/${id}`);
+  }
+
+
+  //login
+  login(reasturantData:any){
+    console.log(reasturantData)
+    if(!this.isLoggedIn()){
+      this.http.get(`${this.newUrl}/restuarant/name/${reasturantData.restaurant}/id/${reasturantData.password}`)
+      .subscribe((value)=>{
+        if(value != 'error')
+          localStorage.setItem('reasturant',value['name']);
+        else
+          console.log('error occured');
+        
+      },error=>{
+        console.log(error);
+      })
+    }
+  }
+  //for the auth guard
+  isLoggedIn(){
+    return localStorage.getItem('reasturant');
+  }
+
+  get my_reasturant(){
+    return localStorage.getItem('reasturant');
+  }
+
+  //logout 
+  logOut(){
+    localStorage.clear()
+  }
+
+  reasturantData(reasturant)
+  {
+    return this.http.get(`${this.newUrl}/restuarant/name/${reasturant}`);
+  }
+
+  updateOrder(order)
+  {
+    return this.http.put(`${this.newUrl}/resturants/order/${order._id}`,order);
   }
 }

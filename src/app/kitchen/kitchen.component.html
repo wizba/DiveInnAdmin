@@ -11,13 +11,14 @@
     </span>
 
     <!-- Default form login -->
-    <form class="text-center border border-light p-5">
+    <form class="text-center border border-light p-5" [formGroup]="loginform">
       <!-- Email -->
       <input
         type="email"
         id="defaultLoginFormEmail"
         class="form-control mb-4"
         placeholder="restaurant name"
+        formControlName='restaurant'
       />
 
       <!-- Password -->
@@ -26,10 +27,11 @@
         id="defaultLoginFormPassword"
         class="form-control mb-4"
         placeholder="restaurant id"
+        formControlName='password'
       />
 
       <!-- Sign in button -->
-      <button mdbBtn color="info" block="true" class="my-4" type="submit">
+      <button mdbBtn color="info" block="true" class="my-4" type="submit" (click)="login()">
         Sign in
       </button>
     </form>

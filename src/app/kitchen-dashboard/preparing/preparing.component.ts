@@ -8,10 +8,15 @@ import { Component, Input, OnInit } from '@angular/core';
 export class PreparingComponent implements OnInit {
 
   @Input('selectedStatus') selectedStatus;
+  
   constructor() { }
 
   ngOnInit(): void {
     console.log(this.selectedStatus);
   }
 
+ public setOrders(order:any){
+      console.log(order);
+      
+  }
 }
