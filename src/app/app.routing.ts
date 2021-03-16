@@ -7,7 +7,7 @@ import { KitchenComponent } from './kitchen/kitchen.component';
 
 
 const routes: Routes = [
-  { path: '',   redirectTo: '/kitchen', pathMatch: 'full' },
+  { path: '',   redirectTo: '/admin', pathMatch: 'full' },
   { path: 'admin', component: AdminComponent },
   { path: 'kitchen', component: KitchenDashboardComponent ,canActivate: [AuthGuard]},
   {path:'login',component:KitchenComponent}
