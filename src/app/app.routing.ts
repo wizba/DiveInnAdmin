@@ -13,7 +13,7 @@ const routes: Routes = [
   {path:'login',component:KitchenComponent}
 ];
 
-@NgModule({
+@NgModule({  
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
