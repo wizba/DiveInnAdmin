@@ -38,7 +38,6 @@ export class KitchenDashboardComponent implements OnInit,OnDestroy {
     return this.socket
       .fromEvent("clientOrder")
       .pipe(map((data:any) =>{ 
-
           this.diveInnAPI.create_order(data)
           .subscribe(async(value)=>{
             this.diveInnAPI.getReasturant(data.resturant)

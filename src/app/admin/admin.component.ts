@@ -15,6 +15,7 @@ import { DataSharing } from '../services/dataSharing.service';
 })
 export class AdminComponent implements OnInit {
 
+  formContro
   modalRef: MDBModalRef;
   searchText:string;
   inputForm:any={
@@ -140,9 +141,13 @@ getAllResturents(){
   }
 
   delete(id:any){
+    console.log(id);
+    
     this.diveInnAPIService.deleteResturent(id)
     .subscribe((data:any[])=>{
-      this.resturents = data;
+      console.log(data);
+      
+      this.diveInnAPIService.resturant= data;
     })
   }
 

@@ -24,7 +24,8 @@ import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { PendingComponent } from './kitchen-dashboard/pending/pending.component';
 import { PreparingComponent } from './kitchen-dashboard/preparing/preparing.component';
 import { DoneComponent } from './kitchen-dashboard/done/done.component';
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+import { environment } from 'src/environments/environment';
+const config: SocketIoConfig = { url: environment.URL, options: {} };
 @NgModule({
   declarations: [
     AppComponent,

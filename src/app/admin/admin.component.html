@@ -6,7 +6,7 @@
             <div class="float-right">
               <i class="fa fa-archive text-primary h4 ml-3"></i>
             </div>
-            <h5 class="font-size-20 mt-0 pt-1">{{ resturents.length }}</h5>
+            <h5 class="font-size-20 mt-0 pt-1">{{diveInnAPIService.resturant.length }}</h5>
             <p class="text-muted mb-0">Total resturents</p>
           </div>
         </div>
@@ -35,6 +35,7 @@
                     class="form-control"
                     placeholder="Search..."
                     aria-describedby="project-search-addon"
+                   
                   />
                   <div class="input-group-append">
                     <button
@@ -150,7 +151,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of this.diveInnAPIService.resturant; let i = index">
+                  <tr *ngFor="let item of this.diveInnAPIService.resturant; let i = index ">
                     <th scope="row">{{ i + 1 }}</th>
                     <td>{{ item.name }}</td>
                     <td>{{ item.created_at | date: "dd/MM/yyyy" }}</td>

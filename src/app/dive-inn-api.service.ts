@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DiveInnAPIService {
-url:any = 'http://localhost:3100/resturant';
-newUrl:any = 'http://localhost:3000'
+//url:any = 'http://localhost:3100/resturant';
+newUrl:any = environment.URL;
 resturant:any[] =[];
 orders:any[] = [];
   constructor(private http:HttpClient) { }
@@ -27,7 +28,7 @@ orders:any[] = [];
   }
 
   deleteResturent(id:any){
-    return this.http.delete(`${this.newUrl}/${id}`);
+    return this.http.delete(`${this.newUrl}/restuarant/${id}`);
   }
 
 
