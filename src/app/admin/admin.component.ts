@@ -33,9 +33,10 @@ export class AdminComponent implements OnInit {
   }
   
   resturents:any[] =[];
+  _resturents:any[] = [];
   showModal:boolean = false;
   seletedResturant:any;
-  
+ 
   constructor(private modalService: MDBModalService,
     public diveInnAPIService:DiveInnAPIService,
     private toaster: Toaster,
@@ -107,6 +108,7 @@ export class AdminComponent implements OnInit {
       
       this.diveInnAPIService.resturant.push(data);
       this.resturents = this.diveInnAPIService.resturant;
+      this._resturents = this.resturents;
       console.log(this.diveInnAPIService.resturant);
     },error=>{
       console.log(error.message)
@@ -127,6 +129,7 @@ getAllResturents(){
   .get_all_resturents()
   .subscribe((data:any[])=>{
     this.resturents = data;
+    this._resturents = this.resturents
     console.log(data);
     this.diveInnAPIService.resturant = data;
   })
@@ -158,6 +161,7 @@ getAllResturents(){
     if(editResturant != undefined){
       this.seletedResturant = editResturant
       console.log(this.seletedResturant)
+      this.editInputForm = this.seletedResturant;
     }
     else
       this.editInputForm.inputForm={
@@ -176,6 +180,7 @@ getAllResturents(){
    .subscribe((data:any[])=>{
     this.showToast('success','restaurant added','success');
     this.resturents = data;
+    this._resturents =this.resturents;
     this.showEditModal();
    },err=>this.showToast('Un successful','update failed','danger'));
     
@@ -199,4 +204,12 @@ getAllResturents(){
 
   ////////////////////////code for kitchen /////////////////////////
   onSubmit(){}
+
+  search(text){
+   this._resturents =this.resturents.filter(element=>{ 
+      return JSON.stringify(element.name).toLowerCase().includes(text);
+    })
+    console.log(this._resturents);
+    
+  }
 }
