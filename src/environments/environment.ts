@@ -3,8 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
- // URL:'https://divein3.herokuapp.com',
-  URL:'http://localhost:3000',
+  URL:'https://divein3.herokuapp.com',
+  //URL:'http://localhost:3000',
   production: false
 };
 
