@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class DiveInnAPIService {
 newUrl:any = environment.URL;
 resturant:any[] =[];
 orders:any[] = [];
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private router:Router) { }
 
   //get all reasturent
   getAllResturents(){
@@ -58,8 +59,10 @@ orders:any[] = [];
     if(!this.isLoggedIn()){
       this.http.get(`${this.newUrl}/restuarant/name/${reasturantData.restaurant}/id/${reasturantData.password}`)
       .subscribe((value)=>{
-        if(value != 'error')
+        if(value != 'error'){
           localStorage.setItem('reasturant',value['name']);
+        this.router.navigate(['/kitchen']);
+      }    
         else
           console.log('error occured');
         

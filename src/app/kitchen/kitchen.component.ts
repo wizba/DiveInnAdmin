@@ -23,7 +23,8 @@ export class KitchenComponent implements OnInit {
   ngOnInit(): void {
   }
   login(){
-    this.diveInnAPI.login(this.loginform.value);
+    this.diveInnAPI.login(this.loginform.value)
+    
     this.loginform.reset();
   }
 
