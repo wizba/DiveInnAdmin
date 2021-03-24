@@ -56,7 +56,7 @@ orders:any[] = [];
   //login
   login(reasturantData:any){
     console.log(reasturantData)
-    if(!this.isLoggedIn()){
+    
       this.http.get(`${this.newUrl}/restuarant/name/${reasturantData.restaurant}/id/${reasturantData.password}`)
       .subscribe((value)=>{
         if(value != 'error'){
@@ -69,7 +69,7 @@ orders:any[] = [];
       },error=>{
         console.log(error);
       })
-    }
+    
   }
   //for the auth guard
   isLoggedIn(){
