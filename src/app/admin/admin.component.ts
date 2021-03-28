@@ -182,7 +182,7 @@ getAllResturents(){
     this.resturents = data;
     this._resturents =this.resturents;
     this.showEditModal();
-   },err=>this.showToast('Un successful','update failed','danger'));
+   },err=>this.showToast('Unsuccessful','update failed','danger'));
     
   }
 

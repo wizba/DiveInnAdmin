@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Socket } from 'ngx-socket-io';
 import { map } from 'rxjs/operators';
 import { DiveInnAPIService } from '../dive-inn-api.service';
@@ -15,12 +16,13 @@ export class KitchenDashboardComponent implements OnInit,OnDestroy {
   selectedPage:any[]=[true,false,false];
   statusFilter:string="pending";
   orders:any[] =[];
-
-
+  resturant:any;
+  costHolder = [];
   
   constructor(private diveInnAPI:DiveInnAPIService,
     private dataSharing:DataSharing,
-    private socket: Socket ){
+    private socket: Socket ,
+    private router:Router){
      
     }
   ngOnDestroy(): void {
@@ -28,9 +30,12 @@ export class KitchenDashboardComponent implements OnInit,OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getClientOrderFromSokcet()
-   this.getRestaurantData();
 
+    console.log(JSON.parse(this.diveInnAPI.my_reasturant));
+    
+    this.getClientOrderFromSokcet()
+    this.getRestaurantData();
+  //  this.getReasturant(JSON.parse(this.diveInnAPI.my_reasturant).password);
    
   }
 
@@ -43,7 +48,10 @@ export class KitchenDashboardComponent implements OnInit,OnDestroy {
             this.diveInnAPI.getReasturant(data.resturant)
             .subscribe((value:any)=>{
               console.log(value)
+
               this.diveInnAPI.orders = value.orders;
+
+              
               this.filterByStatus('pending');
             },error=>{
               console.error(error)
@@ -71,10 +79,22 @@ export class KitchenDashboardComponent implements OnInit,OnDestroy {
     if(this.diveInnAPI.my_reasturant)
     this.diveInnAPI.reasturantData(this.diveInnAPI.my_reasturant)
     .subscribe((value:any)=>{
+      console.log(value);
+      this.resturant = value;
       this.diveInnAPI.orders = value.orders;
+      this.calcCost(this.diveInnAPI.orders)
       this.filterByStatus('pending');
     },error=>{
         alert('something went wrong');
+    })
+  }
+
+  currentStore:any;
+  getReasturant(id){
+    this.diveInnAPI.getReasturant(id)
+    .subscribe((resturant:any)=>{
+       console.log(resturant);
+    
     })
   }
 
@@ -173,11 +193,31 @@ export class KitchenDashboardComponent implements OnInit,OnDestroy {
     .subscribe(async(value:any)=>{
       this.diveInnAPI.orders =await value.orders;
       console.log(this.diveInnAPI.orders)
+      this.calcCost(this.diveInnAPI.orders)
       this.filterByStatus(status);
     },error=>{
         alert('something went wrong');
     })
   }
 
+  //calculates cost
+  calcCost(orders:any[]){
+      orders.forEach((order,index)=>{
+        let sum = 0;
+        order.items
+        .forEach(element => {
+          sum += element.cost;
+        });
+        this.costHolder[index] = sum;
+        
+      })
+
+      console.log(this.costHolder);
+      
+  }
+  logout(){
+    this.diveInnAPI.logOut();
+    this.router.navigate(['/login'])
+  }
   
 }

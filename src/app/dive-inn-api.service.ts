@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { Toaster } from 'ngx-toast-notifications';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class DiveInnAPIService {
 newUrl:any = environment.URL;
 resturant:any[] =[];
 orders:any[] = [];
-  constructor(private http:HttpClient,private router:Router) { }
+  constructor(private http:HttpClient,private router:Router,private toaster: Toaster) { }
 
   //get all reasturent
   getAllResturents(){
@@ -60,20 +61,28 @@ orders:any[] = [];
       this.http.get(`${this.newUrl}/restuarant/name/${reasturantData.restaurant}/id/${reasturantData.password}`)
       .subscribe((value)=>{
         if(value != 'error'){
-          localStorage.setItem('reasturant',value['name']);
+          localStorage.setItem('reasturant',JSON.stringify(reasturantData));
         this.router.navigate(['/kitchen']);
       }    
         else
-          console.log('error occured');
+          {
+            console.log('error occured');
+          this.showToast('Unsuccessful','invalid name or password','danger');
+        }
         
       },error=>{
         console.log(error);
+        this.showToast('Unsuccessful','invalid name or password','danger');
+        
       })
     
   }
   //for the auth guard
   isLoggedIn(){
-    return localStorage.getItem('reasturant');
+
+    console.log(JSON.parse(localStorage.getItem('reasturant')));
+    
+    return localStorage.getItem('reasturant')
   }
 
   get my_reasturant(){
@@ -85,13 +94,20 @@ orders:any[] = [];
     localStorage.clear()
   }
 
-  reasturantData(reasturant)
-  {
-    return this.http.get(`${this.newUrl}/restuarant/name/${reasturant}`);
+  reasturantData(reasturant){
+    return this.http.get(`${this.newUrl}/restuarant/name/${JSON.parse(reasturant).restaurant}`);
   }
 
   updateOrder(order)
   {
     return this.http.put(`${this.newUrl}/resturants/order/${order._id}`,order);
+  }
+
+  showToast(title,body,color) {
+    this.toaster.open({ text: body,
+      caption: title,
+      type:color ,
+      position:'top-right'
+    });
   }
 }

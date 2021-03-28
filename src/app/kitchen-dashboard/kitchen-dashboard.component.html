@@ -2,7 +2,7 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark bg-primary" [containerInside]="false">
 
     <!-- Navbar brand -->
-    <mdb-navbar-brand><a class="navbar-brand" href="#">DIveinn</a></mdb-navbar-brand>
+    <img [src]=resturant.logo_url style="width: 80px;" alt="" class="img-fluid rounded-circle z-depth-0 mr-5">
   
     <!-- Collapsible content -->
     <links>
@@ -17,6 +17,10 @@
         </li>
         <li class="nav-item">
           <a class="nav-link waves-light" mdbWavesEffect (click)="filterByStatus('done')">Done</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link waves-light" mdbWavesEffect (click)="logout()">logout</a>
         </li>
   
         <!-- Dropdown -->
@@ -48,12 +52,13 @@
         <mdb-card-body>
           <!--Title-->
           <mdb-card-title>
-            <h4>Ordered by pending</h4>
+            <h4>Order status {{item.status}}</h4>
           </mdb-card-title>
   
           <!--Text-->
           <mdb-card-text> order number : {{i+1}} </mdb-card-text>
-          <mdb-card-text> cost : R {{item.cost}} </mdb-card-text>
+          <mdb-card-text> order id : {{item._id}} </mdb-card-text>
+          <mdb-card-text> cost : R {{this.costHolder[i]  | number : '1.2-2'}} </mdb-card-text>
           <mdb-card-text> time : {{item.created_at}} </mdb-card-text>
           <mdb-card-text> status : {{item.status}} </mdb-card-text>
           <button
